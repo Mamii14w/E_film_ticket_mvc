@@ -1,8 +1,13 @@
+using E_film_ticket.Data;
+using E_film_ticket.Data.Services;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString ("DefaultConectionString")));
+builder.Services.AddScoped<IActorServices, ActorServices>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -23,5 +28,5 @@ app.UseAuthorization();
 app.MapControllerRoute(
 	name: "default",
 	pattern: "{controller=Home}/{action=Index}/{id?}");
-
+AppDbInitialize.Seed(app);
 app.Run();
