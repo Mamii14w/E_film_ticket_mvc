@@ -4,10 +4,10 @@ namespace E_film_ticket.Data.Services
 {
     public interface IActorServices
     {
-        IEnumerable<Actor> GetAll();
-        Actor GetById(int id);
-        void Add(Actor actor);
-        Actor Update(int id, Actor NewActor);
-        Actor Delete(int id);
+       Task<IEnumerable<Actor>> GetAllAsync();
+        Task<Actor> GetByIdAsync(int id);
+        Task AddAsync(Actor actor);
+        Task<Actor> UpdateAsync(int id, Actor NewActor);
+        Task DeleteAsync(int id);
     }
 }

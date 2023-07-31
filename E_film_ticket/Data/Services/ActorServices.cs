@@ -1,4 +1,5 @@
 ﻿using E_film_ticket.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace E_film_ticket.Data.Services
 {
@@ -9,32 +10,38 @@ namespace E_film_ticket.Data.Services
         {
             _context = context;   
         }
-        public void Add(Actor actor)
+        public async Task  AddAsync(Actor actor)
         {
-            throw new NotImplementedException();
+           await _context.Actors.AddAsync(actor);
+           await _context.SaveChangesAsync();
         }
 
-        public Actor Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            var result = await _context.Actors.FirstOrDefaultAsync(n => n.Aid == id);
+            _context.Actors.Remove(result);
+            _context.SaveChanges();
         }
 
-        public IEnumerable<Actor> GetAll()
-        {var val = _context.Actors.ToList();
+        public async Task<IEnumerable<Actor>> GetAllAsync()
+        {
+            var val =await _context.Actors.ToListAsync();
             return val;
         }
 
-        public Actor GetById(int id)
+        public  async Task<Actor> GetByIdAsync(int id)
         {
-            
-           
-            throw new NotImplementedException();
+
+            var res = await _context.Actors.FirstOrDefaultAsync(n => n.Aid == id);
+            return res;
         }
 
-        public Actor Update(int id, Actor actor)
+        public async Task<Actor> UpdateAsync(int id, Actor actor)
         {
-            throw new NotImplementedException();
+            _context.Update(actor);
+            await _context.SaveChangesAsync();
+            return actor;
         }
     }
-}
 
+}

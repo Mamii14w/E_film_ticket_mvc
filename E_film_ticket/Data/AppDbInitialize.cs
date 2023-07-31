@@ -111,7 +111,7 @@ namespace E_film_ticket.Data
 					Name = "Hello",
 					Description = "Its all about Phone generation ",
 					price = 50,
-					Image = "../Images/logo1.png",
+					Image = "../Images/logo2.png",
 					StartDate = DateTime.Now,
 					EndDate = DateTime.Now.AddDays(1),
 					MovieCatagory = MovieCtacory.Documentary,
